@@ -17,13 +17,6 @@ const navItems = [
   { label: 'Contact', href: '#contact' },
 ];
 
-const productData = [
-  { name: 'Carrara Quartz', description: 'Durable & pure surface for modern spaces.', img: product1 },
-  { name: 'Absolute Black', description: 'Timeless strength with bold character.', img: product2 },
-  { name: 'Calacatta Gold Marble', description: 'Regal veins for luxury interiors.', img: product3 },
-  { name: 'Crema Limestone', description: 'Subtle warmth & natural serenity.', img: product4 },
-];
-
 // --- Helper Components ---
 
 const NavItem = ({ label, href, onClick }) => (
@@ -61,9 +54,44 @@ const ProductCard = ({ name, description, img }) => (
 
 const MarbleGraniteLandingPage = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showPopup, setShowPopup] = useState(true); // popup state
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
+      {/* Under Construction Popup */}
+      {showPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm">
+          <div className="relative w-[90%] max-w-md rounded-3xl bg-white shadow-2xl border border-slate-200 p-6 sm:p-7">
+            {/* Close Button */}
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute right-4 top-4 text-slate-400 hover:text-slate-600 text-sm"
+              aria-label="Close popup"
+            >
+              ✕
+            </button>
+
+            <p className="text-[11px] font-semibold tracking-[0.25em] text-amber-600 uppercase mb-2">
+              Coming Soon
+            </p>
+            <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 mb-3">
+              This site is currently under construction.
+            </h2>
+            <p className="text-sm text-slate-600 mb-5">
+              We&apos;re polishing the details and will be live very soon. 
+              Thank you for your patience — our team will get back to you shortly.
+            </p>
+
+            <button
+              onClick={() => setShowPopup(false)}
+              className="w-full inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-slate-800 transition-colors"
+            >
+              Enter temporary preview
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* HEADER + HERO */}
       <header
         id="home"
@@ -281,42 +309,6 @@ const MarbleGraniteLandingPage = () => {
         </div>
       </section>
 
-      {/* COLLECTIONS / PRODUCTS */}
-      <section
-        id="collections"
-        className="bg-white border-y border-slate-100 py-14 sm:py-16 lg:py-20"
-      >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
-            <div>
-              <p className="text-xs font-semibold tracking-[0.25em] text-amber-700 uppercase mb-2">
-                Collections
-              </p>
-              <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900">
-                Signature stones for every application.
-              </h2>
-              <p className="mt-2 text-sm text-slate-600 max-w-xl">
-                From classic blacks to dramatic veined marbles, explore a curated range of surfaces
-                ideal for countertops, flooring, façades, and bespoke installations.
-              </p>
-            </div>
-            <a
-              href="#contact"
-              className="inline-flex items-center rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-xs sm:text-sm font-medium text-slate-800 hover:border-slate-400"
-            >
-              Share your project requirements
-            </a>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {productData.map((product) => (
-              <ProductCard key={product.name} {...product} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-
       {/* ERP / DEALER PORTAL */}
       <section
         id="erp-portal"
@@ -424,12 +416,6 @@ const MarbleGraniteLandingPage = () => {
           </div>
         </div>
       </section>
-
-
-
-
-
-
 
       {/* CONTACT / FORM */}
       <section
