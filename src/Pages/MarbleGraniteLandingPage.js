@@ -54,44 +54,12 @@ const ProductCard = ({ name, description, img }) => (
 
 const MarbleGraniteLandingPage = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [showPopup, setShowPopup] = useState(true); // popup state
+
+  const whatsappNumber = '+919900064364';
+  const whatsappLink = `https://wa.me/919900064364`;
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
-      {/* Under Construction Popup */}
-      {showPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm">
-          <div className="relative w-[90%] max-w-md rounded-3xl bg-white shadow-2xl border border-slate-200 p-6 sm:p-7">
-            {/* Close Button */}
-            <button
-              onClick={() => setShowPopup(false)}
-              className="absolute right-4 top-4 text-slate-400 hover:text-slate-600 text-sm"
-              aria-label="Close popup"
-            >
-              ✕
-            </button>
-
-            <p className="text-[11px] font-semibold tracking-[0.25em] text-amber-600 uppercase mb-2">
-              Coming Soon
-            </p>
-            <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 mb-3">
-              This site is currently under construction.
-            </h2>
-            <p className="text-sm text-slate-600 mb-5">
-              We&apos;re polishing the details and will be live very soon. 
-              Thank you for your patience — our team will get back to you shortly.
-            </p>
-
-            <button
-              onClick={() => setShowPopup(false)}
-              className="w-full inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-slate-800 transition-colors"
-            >
-              Enter temporary preview
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* HEADER + HERO */}
       <header
         id="home"
@@ -247,6 +215,27 @@ const MarbleGraniteLandingPage = () => {
         </div>
       </header>
 
+      {/* UNDER CONSTRUCTION NOTICE (inline instead of popup) */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+        <div className="rounded-2xl border border-amber-100 bg-amber-50 px-4 py-3 sm:px-6 sm:py-4 flex items-start gap-3">
+          <div className="mt-0.5 flex h-8 w-8 items-center justify-center rounded-full bg-amber-100 text-amber-700 text-lg">
+            🛠️
+          </div>
+          <div className="space-y-1">
+            <p className="text-[11px] font-semibold tracking-[0.25em] text-amber-700 uppercase">
+              Site Update
+            </p>
+            <p className="text-sm font-medium text-slate-900">
+              This site is currently under construction.
+            </p>
+            <p className="text-xs sm:text-sm text-slate-600">
+              We&apos;re polishing the details and will be live very soon. Thank you for your
+              patience — you&apos;re viewing a temporary preview of the Hilltop Granites website.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ABOUT SECTION */}
       <section
         id="about-us"
@@ -294,41 +283,41 @@ const MarbleGraniteLandingPage = () => {
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2 mt-6">
-              {['Granite & Marble', 'Quartz Surfaces', 'Export-Ready Stock', 'Custom Thickness & Finish'].map(
-                (tag) => (
-                  <span
-                    key={tag}
-                    className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-[11px] font-medium text-slate-700"
-                  >
-                    {tag}
-                  </span>
-                )
-              )}
+              {[
+                'Granite & Marble',
+                'Quartz Surfaces',
+                'Export-Ready Stock',
+                'Custom Thickness & Finish',
+              ].map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-[11px] font-medium text-slate-700"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* ERP / DEALER PORTAL */}
-      <section
-        id="erp-portal"
-        className="bg-slate-900"
-      >
+      <section id="erp-portal" className="bg-slate-900">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-14">
           <div className="grid gap-8 lg:grid-cols-[1.4fr,1fr] items-center">
-            
             {/* Text Block */}
             <div>
               <p className="text-[11px] font-semibold tracking-[0.25em] text-amber-300 uppercase mb-2">
-                ERP · Live Inventory & Orders
+                ERP · India & USA Live Inventory
               </p>
               <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-3">
                 Hilltop Stones ERP access for teams, dealers & partners.
               </h2>
               <p className="text-sm sm:text-base text-slate-200 leading-relaxed mb-4">
-                Check live stock, track orders, manage quotes and access product information 
-                directly through our dedicated ERP portal. Built for internal teams, 
-                distributors and fabrication partners who need real-time data.
+                Check live stock, track orders, manage quotes and access product information
+                directly through our dedicated ERP portal. Built for internal teams,
+                distributors and fabrication partners who need real-time data, including
+                USA live inventory.
               </p>
 
               <div className="flex flex-wrap gap-2 mb-5">
@@ -340,6 +329,9 @@ const MarbleGraniteLandingPage = () => {
                 </span>
                 <span className="inline-flex items-center rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[11px] font-medium text-slate-100">
                   Dealer / partner login
+                </span>
+                <span className="inline-flex items-center rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[11px] font-medium text-slate-100">
+                  USA live inventory access
                 </span>
               </div>
 
@@ -362,7 +354,7 @@ const MarbleGraniteLandingPage = () => {
             <div className="relative">
               <div className="relative rounded-3xl border border-white/10 bg-gradient-to-br from-slate-800 via-slate-900 to-black p-5 sm:p-6 shadow-xl overflow-hidden">
                 <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top,_#ffffff,_transparent_55%)]" />
-                
+
                 <div className="relative space-y-3">
                   <div className="flex items-center justify-between">
                     <p className="text-xs font-semibold text-slate-200">
@@ -385,6 +377,10 @@ const MarbleGraniteLandingPage = () => {
                     <div className="flex items-center justify-between text-[11px] text-slate-200">
                       <span>Global locations</span>
                       <span className="font-semibold">India · USA</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[11px] text-slate-200">
+                      <span>USA live inventory</span>
+                      <span className="font-semibold">Updated daily</span>
                     </div>
                   </div>
 
@@ -437,7 +433,32 @@ const MarbleGraniteLandingPage = () => {
               contractors, and homeowners.
             </p>
 
-            <div className="grid gap-4 text-sm text-slate-600">
+            {/* Direct Contact Details */}
+            <div className="space-y-1 text-sm sm:text-base text-slate-700">
+              <p className="font-semibold text-slate-800 text-sm">
+                Contact us directly
+              </p>
+              <p className="text-xs sm:text-sm">
+                Phone:{' '}
+                <a
+                  href={`tel:${whatsappNumber}`}
+                  className="font-medium text-amber-700 hover:text-amber-800"
+                >
+                  +91 99000 64364
+                </a>
+              </p>
+              <p className="text-xs sm:text-sm">
+                Email:{' '}
+                <a
+                  href="mailto:armaan@hilltopgranite.com"
+                  className="font-medium text-amber-700 hover:text-amber-800"
+                >
+                  armaan@hilltopgranite.com
+                </a>
+              </p>
+            </div>
+
+            <div className="grid gap-4 text-sm text-slate-600 pt-3">
               <div>
                 <p className="font-semibold text-slate-800 text-sm">Ideal for</p>
                 <p className="text-xs sm:text-sm text-slate-600">
@@ -552,6 +573,26 @@ const MarbleGraniteLandingPage = () => {
       </section>
 
       <Footer />
+
+      {/* WhatsApp Floating Button */}
+      <a
+        href={whatsappLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-4 right-4 z-40 inline-flex items-center justify-center rounded-full bg-emerald-500 px-4 py-4 shadow-lg hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-slate-900"
+        aria-label="Chat with Hilltop on WhatsApp"
+      >
+        <svg
+          className="h-6 w-6 text-white"
+          viewBox="0 0 32 32"
+          aria-hidden="true"
+        >
+          <path
+            fill="currentColor"
+            d="M16 4C9.935 4 5 8.935 5 15c0 2.16.64 4.166 1.75 5.86L6 27l6.3-1.63A10.8 10.8 0 0016 26c6.065 0 11-4.935 11-11S22.065 4 16 4zm0 2c4.963 0 9 4.037 9 9s-4.037 9-9 9a8.8 8.8 0 01-3.7-.82l-.27-.13-3.74.96.99-3.64-.17-.28A8.7 8.7 0 017 15c0-4.963 4.037-9 9-9zm4.37 11.78c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.01-.37.11-.49.11-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.43h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.15 1.52.09.46-.07 1.42-.58 1.62-1.13.2-.55.2-1.01.14-1.11-.06-.1-.22-.16-.46-.28z"
+          />
+        </svg>
+      </a>
     </div>
   );
 };
