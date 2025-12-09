@@ -108,7 +108,7 @@ const MarbleGraniteLandingPage = () => {
     fullName: '',
     phone: '',
     email: '',
-    projectType: '',
+    productType: '',
     message: '',
   });
 
@@ -130,7 +130,7 @@ const MarbleGraniteLandingPage = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const { fullName, phone, email, projectType, message } = formData;
+    const { fullName, phone, email, productType, message } = formData;
 
     const text = `
 New enquiry from Hilltop website:
@@ -138,7 +138,7 @@ New enquiry from Hilltop website:
 Name: ${fullName || '-'}
 Phone: ${phone || '-'}
 Email: ${email || '-'}
-Project Type: ${projectType || '-'}
+Project Type: ${productType || '-'}
 
 Message:
 ${message || '-'}
@@ -670,21 +670,22 @@ ${message || '-'}
               {/* Project Type */}
               <div>
                 <label className="block text-xs font-semibold mb-1.5 text-slate-700 text-left">
-                  Project Type
+                  Product Type
                 </label>
                 <select
                   className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 outline-none"
-                  value={formData.projectType}
-                  onChange={handleFormChange('projectType')}
+                  value={formData.productType}
+                  onChange={handleFormChange('productType')}
                 >
                   <option value="">
-                    Select project type
+                    Select Product
                   </option>
-                  <option>Residential</option>
-                  <option>Commercial</option>
-                  <option>Hospitality</option>
-                  <option>Export / Bulk Supply</option>
-                  <option>Other</option>
+                  <option>Granite</option>
+                  <option>Marble</option>
+                  <option>Quartrzite</option>
+                  <option>Porcelain</option>
+                  <option>Quartz</option>
+                  <option>SPC</option>
                 </select>
               </div>
 
