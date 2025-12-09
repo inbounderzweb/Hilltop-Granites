@@ -13,7 +13,7 @@ import Footer from '../components/Footer';
 const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About Us', href: '#about-us' },
-  { label: 'Collections', href: '#collections' },
+  { label: 'Live Inventory', href: 'https://hilltopstones.stoneprofitsweb.com/' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -341,7 +341,7 @@ const MarbleGraniteLandingPage = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm hover:bg-amber-300 transition-colors"
               >
-                Open ERP Dashboard
+                Live Inventory
                 <span className="ml-2 text-xs">↗</span>
               </a>
 
