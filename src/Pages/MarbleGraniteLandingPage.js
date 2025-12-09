@@ -13,8 +13,18 @@ import Footer from '../components/Footer';
 const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About Us', href: '#about-us' },
-  { label: 'Live Inventory', href: 'https://hilltopstones.stoneprofitsweb.com/' },
+  { label: 'Products', href: '#products' }, // handled as dropdown
+  { label: 'USA Live Inventory', href: 'https://hilltopstones.stoneprofitsweb.com/' },
   { label: 'Contact', href: '#contact' },
+];
+
+const productCategories = [
+  'Granite',
+  'Marble',
+  'Quartzite',
+  'Porcelain',
+  'Quartz',
+  'SPC',
 ];
 
 // --- Helper Components ---
@@ -27,6 +37,45 @@ const NavItem = ({ label, href, onClick }) => (
   >
     {label}
   </a>
+);
+
+const ProductsDropdown = ({ onSelect }) => (
+  <div className="relative group">
+    <button
+      type="button"
+      className="inline-flex items-center text-sm font-medium text-slate-700 hover:text-amber-700 transition-colors duration-200"
+    >
+      Products
+      <svg
+        className="ml-1 h-3 w-3"
+        viewBox="0 0 20 20"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M5 7l5 5 5-5"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </button>
+
+    {/* Dropdown */}
+    <div className="pointer-events-none -mt-[1px] opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto absolute left-0 w-44 rounded-2xl bg-white shadow-lg border border-slate-100 py-2 z-30">
+      {productCategories.map((product) => (
+        <button
+          key={product}
+          type="button"
+          onClick={() => onSelect(product)}
+          className="block w-full text-left px-4 py-1.5 text-sm text-slate-700 hover:bg-amber-50 hover:text-amber-800"
+        >
+          {product}
+        </button>
+      ))}
+    </div>
+  </div>
 );
 
 const ProductCard = ({ name, description, img }) => (
@@ -55,8 +104,49 @@ const ProductCard = ({ name, description, img }) => (
 const MarbleGraniteLandingPage = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const [formData, setFormData] = useState({
+    fullName: '',
+    phone: '',
+    email: '',
+    projectType: '',
+    message: '',
+  });
+
   const whatsappNumber = '+919900064364';
   const whatsappLink = `https://wa.me/919900064364`;
+
+  const handleProductWhatsApp = (product) => {
+    const text = encodeURIComponent(`Hi, I'm interested in ${product}.`);
+    window.open(`${whatsappLink}?text=${text}`, '_blank');
+  };
+
+  const handleFormChange = (field) => (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: e.target.value,
+    }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    const { fullName, phone, email, projectType, message } = formData;
+
+    const text = `
+New enquiry from Hilltop website:
+
+Name: ${fullName || '-'}
+Phone: ${phone || '-'}
+Email: ${email || '-'}
+Project Type: ${projectType || '-'}
+
+Message:
+${message || '-'}
+    `.trim();
+
+    const encoded = encodeURIComponent(text);
+    window.open(`${whatsappLink}?text=${encoded}`, '_blank');
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
@@ -81,9 +171,24 @@ const MarbleGraniteLandingPage = () => {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <NavItem key={item.label} label={item.label} href={item.href} />
-            ))}
+            {navItems.map((item) => {
+              if (item.label === 'Products') {
+                return (
+                  <ProductsDropdown
+                    key={item.label}
+                    onSelect={handleProductWhatsApp}
+                  />
+                );
+              }
+
+              return (
+                <NavItem
+                  key={item.label}
+                  label={item.label}
+                  href={item.href}
+                />
+              );
+            })}
             <a
               href="#contact"
               className="inline-flex items-center rounded-full border border-amber-600 bg-amber-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-amber-700 transition-colors duration-200"
@@ -111,15 +216,42 @@ const MarbleGraniteLandingPage = () => {
         {mobileOpen && (
           <div className="md:hidden border-t border-slate-100 bg-white">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 space-y-4">
-              {navItems.map((item) => (
-                <div key={item.label}>
-                  <NavItem
-                    label={item.label}
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                  />
-                </div>
-              ))}
+              {navItems.map((item) => {
+                if (item.label === 'Products') {
+                  return (
+                    <div key={item.label} className="space-y-2">
+                      <p className="text-xs font-semibold text-slate-500">
+                        Products
+                      </p>
+                      <div className="grid grid-cols-2 gap-2">
+                        {productCategories.map((product) => (
+                          <button
+                            key={product}
+                            type="button"
+                            onClick={() => {
+                              setMobileOpen(false);
+                              handleProductWhatsApp(product);
+                            }}
+                            className="w-full rounded-full border border-slate-200 px-3 py-1.5 text-xs text-slate-700 text-left hover:border-amber-400 hover:text-amber-800"
+                          >
+                            {product}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div key={item.label}>
+                    <NavItem
+                      label={item.label}
+                      href={item.href}
+                      onClick={() => setMobileOpen(false)}
+                    />
+                  </div>
+                );
+              })}
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
@@ -341,7 +473,7 @@ const MarbleGraniteLandingPage = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm hover:bg-amber-300 transition-colors"
               >
-                Live Inventory
+                USA Live Inventory
                 <span className="ml-2 text-xs">↗</span>
               </a>
 
@@ -485,7 +617,10 @@ const MarbleGraniteLandingPage = () => {
           {/* Form */}
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-tr from-amber-100/40 via-white to-slate-100/40 rounded-3xl blur-xl -z-10" />
-            <form className="relative space-y-5 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-lg">
+            <form
+              className="relative space-y-5 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-lg"
+              onSubmit={handleFormSubmit}
+            >
               <div className="grid sm:grid-cols-2 gap-4">
                 {/* Full Name */}
                 <div>
@@ -496,6 +631,9 @@ const MarbleGraniteLandingPage = () => {
                     type="text"
                     className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 outline-none"
                     placeholder="Enter your name"
+                    value={formData.fullName}
+                    onChange={handleFormChange('fullName')}
+                    required
                   />
                 </div>
 
@@ -508,6 +646,9 @@ const MarbleGraniteLandingPage = () => {
                     type="tel"
                     className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 outline-none"
                     placeholder="Enter your phone"
+                    value={formData.phone}
+                    onChange={handleFormChange('phone')}
+                    required
                   />
                 </div>
               </div>
@@ -521,6 +662,8 @@ const MarbleGraniteLandingPage = () => {
                   type="email"
                   className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 outline-none"
                   placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={handleFormChange('email')}
                 />
               </div>
 
@@ -531,9 +674,10 @@ const MarbleGraniteLandingPage = () => {
                 </label>
                 <select
                   className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 outline-none"
-                  defaultValue=""
+                  value={formData.projectType}
+                  onChange={handleFormChange('projectType')}
                 >
-                  <option value="" disabled>
+                  <option value="">
                     Select project type
                   </option>
                   <option>Residential</option>
@@ -553,6 +697,8 @@ const MarbleGraniteLandingPage = () => {
                   rows="4"
                   className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 outline-none resize-none"
                   placeholder="Share your requirements, approximate area, stone preference, etc."
+                  value={formData.message}
+                  onChange={handleFormChange('message')}
                 ></textarea>
               </div>
 
@@ -561,11 +707,11 @@ const MarbleGraniteLandingPage = () => {
                 type="submit"
                 className="w-full inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-slate-800 transition-colors duration-200"
               >
-                Submit enquiry
+                Submit enquiry via WhatsApp
               </button>
 
               <p className="text-[11px] text-slate-500 text-center">
-                Our team will get back to you within 1–2 business days with the next steps.
+                When you submit, we’ll open WhatsApp with your enquiry details pre-filled.
               </p>
             </form>
           </div>
@@ -574,7 +720,7 @@ const MarbleGraniteLandingPage = () => {
 
       <Footer />
 
-      {/* WhatsApp Floating Button */}
+      {/* WhatsApp Floating Button with Pulse */}
       <a
         href={whatsappLink}
         target="_blank"
@@ -582,16 +728,22 @@ const MarbleGraniteLandingPage = () => {
         className="fixed bottom-4 right-4 z-40 inline-flex items-center justify-center rounded-full bg-emerald-500 px-4 py-4 shadow-lg hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-slate-900"
         aria-label="Chat with Hilltop on WhatsApp"
       >
-        <svg
-          className="h-6 w-6 text-white"
-          viewBox="0 0 32 32"
-          aria-hidden="true"
-        >
-          <path
-            fill="currentColor"
-            d="M16 4C9.935 4 5 8.935 5 15c0 2.16.64 4.166 1.75 5.86L6 27l6.3-1.63A10.8 10.8 0 0016 26c6.065 0 11-4.935 11-11S22.065 4 16 4zm0 2c4.963 0 9 4.037 9 9s-4.037 9-9 9a8.8 8.8 0 01-3.7-.82l-.27-.13-3.74.96.99-3.64-.17-.28A8.7 8.7 0 017 15c0-4.963 4.037-9 9-9zm4.37 11.78c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.01-.37.11-.49.11-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.43h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.15 1.52.09.46-.07 1.42-.58 1.62-1.13.2-.55.2-1.01.14-1.11-.06-.1-.22-.16-.46-.28z"
-          />
-        </svg>
+        {/* Pulse circle */}
+        <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 animate-ping" />
+
+        {/* Icon layer */}
+        <span className="relative inline-flex items-center justify-center">
+          <svg
+            className="h-6 w-6 text-white"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+          >
+            <path
+              fill="currentColor"
+              d="M16 4C9.935 4 5 8.935 5 15c0 2.16.64 4.166 1.75 5.86L6 27l6.3-1.63A10.8 10.8 0 0016 26c6.065 0 11-4.935 11-11S22.065 4 16 4zm0 2c4.963 0 9 4.037 9 9s-4.037 9-9 9a8.8 8.8 0 01-3.7-.82l-.27-.13-3.74.96.99-3.64-.17-.28A8.7 8.7 0 017 15c0-4.963 4.037-9 9-9zm4.37 11.78c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.01-.37.11-.49.11-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.43h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.15 1.52.09.46-.07 1.42-.58 1.62-1.13.2-.55.2-1.01.14-1.11-.06-.1-.22-.16-.46-.28z"
+            />
+          </svg>
+        </span>
       </a>
     </div>
   );
