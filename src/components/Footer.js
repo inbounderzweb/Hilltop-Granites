@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Footer = () => {
   const [openRegion, setOpenRegion] = useState(null);
-  const whatsappLink = 'https://wa.me/919900064364';
+  const whatsappLink = "https://wa.me/919900064364";
 
   const toggleRegion = (region) => {
     setOpenRegion((prev) => (prev === region ? null : region));
@@ -16,7 +16,7 @@ const Footer = () => {
           <div className="rounded-2xl border border-slate-800 bg-slate-900/60">
             <button
               type="button"
-              onClick={() => toggleRegion('india')}
+              onClick={() => toggleRegion("india")}
               className="w-full flex items-center justify-between px-4 py-3 sm:px-5 sm:py-4"
             >
               <div className="text-left">
@@ -28,19 +28,20 @@ const Footer = () => {
                 </p>
               </div>
               <span className="text-slate-400 text-lg">
-                {openRegion === 'india' ? '−' : '+'}
+                {openRegion === "india" ? "−" : "+"}
               </span>
             </button>
 
-            {openRegion === 'india' && (
+            {openRegion === "india" && (
               <div className="px-4 pb-4 sm:px-5 sm:pb-5 space-y-3 text-xs sm:text-sm text-slate-300">
                 <p className="leading-relaxed">
-                  14/1, Bannerghatta Road,
+                  736, 7th Cross Rd, 3rd Block,
                   <br />
-                  Near Mico Back Gate, Adugodi,
+                  Koramangala 4-B Block, Koramangala 3 Block,
                   <br />
-                  Bengaluru, Karnataka 560030, India
+                  Koramangala, Bengaluru, Karnataka 560034
                 </p>
+
                 {/* Add more India locations if needed */}
                 {/* <p>Another India branch address...</p> */}
 
@@ -61,7 +62,7 @@ const Footer = () => {
           <div className="rounded-2xl border border-slate-800 bg-slate-900/60">
             <button
               type="button"
-              onClick={() => toggleRegion('usa')}
+              onClick={() => toggleRegion("usa")}
               className="w-full flex items-center justify-between px-4 py-3 sm:px-5 sm:py-4"
             >
               <div className="text-left">
@@ -73,11 +74,11 @@ const Footer = () => {
                 </p>
               </div>
               <span className="text-slate-400 text-lg">
-                {openRegion === 'usa' ? '−' : '+'}
+                {openRegion === "usa" ? "−" : "+"}
               </span>
             </button>
 
-            {openRegion === 'usa' && (
+            {openRegion === "usa" && (
               <div className="px-4 pb-4 sm:px-5 sm:pb-5 space-y-3 text-xs sm:text-sm text-slate-300">
                 <div>
                   <p className="font-semibold text-slate-100 text-xs sm:text-sm">
@@ -131,8 +132,8 @@ const Footer = () => {
             © {new Date().getFullYear()} Hilltop Granites. All rights reserved.
           </p>
           <p>
-            Temporary preview site for Hilltop Granites – full experience
-            coming soon.
+            Temporary preview site for Hilltop Granites – full experience coming
+            soon.
           </p>
         </div>
       </div>

@@ -160,12 +160,12 @@ ${message || '-'}
           <div className="flex items-center space-x-3">
             <img src={logo} alt="Hilltop Granites Logo" className="h-10 w-auto" />
             <div className="hidden sm:block">
-              <p className="text-xs font-medium tracking-[0.2em] text-slate-500 uppercase">
+              {/* <p className="text-xs font-medium tracking-[0.2em] text-slate-500 uppercase">
                 Hilltop Granites
               </p>
               <p className="text-[11px] text-slate-400">
                 Crafting elegance since 1989
-              </p>
+              </p> */}
             </div>
           </div>
 
@@ -268,9 +268,9 @@ ${message || '-'}
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 grid gap-10 lg:grid-cols-2 items-center">
             {/* Hero Text */}
             <div className="space-y-6">
-              <span className="inline-flex items-center rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-800 border border-amber-100 tracking-wide">
+              {/* <span className="inline-flex items-center rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-800 border border-amber-100 tracking-wide">
                 INDIA’S LEADING STONE SPECIALISTS · SINCE 1989
-              </span>
+              </span> */}
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900">
                 Natural stone & quartz surfaces for spaces that endure.
@@ -414,7 +414,7 @@ ${message || '-'}
             </p>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2 mt-6">
+            {/* <div className="flex flex-wrap gap-2 mt-6">
               {[
                 'Granite & Marble',
                 'Quartz Surfaces',
@@ -428,7 +428,7 @@ ${message || '-'}
                   {tag}
                 </span>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -436,7 +436,7 @@ ${message || '-'}
       {/* ERP / DEALER PORTAL */}
       <section id="erp-portal" className="bg-slate-900">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-14">
-          <div className="grid gap-8 lg:grid-cols-[1.4fr,1fr] items-center">
+          <div className="grid gap-8 lg:grid-cols-1 items-center">
             {/* Text Block */}
             <div>
               <p className="text-[11px] font-semibold tracking-[0.25em] text-amber-300 uppercase mb-2">
@@ -452,7 +452,7 @@ ${message || '-'}
                 USA live inventory.
               </p>
 
-              <div className="flex flex-wrap gap-2 mb-5">
+              <div className=" gap-2 mb-5">
                 <span className="inline-flex items-center rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[11px] font-medium text-slate-100">
                   Real-time inventory
                 </span>
@@ -483,7 +483,7 @@ ${message || '-'}
             </div>
 
             {/* Visual / Card Block */}
-            <div className="relative">
+            {/* <div className="relative">
               <div className="relative rounded-3xl border border-white/10 bg-gradient-to-br from-slate-800 via-slate-900 to-black p-5 sm:p-6 shadow-xl overflow-hidden">
                 <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top,_#ffffff,_transparent_55%)]" />
 
@@ -540,7 +540,7 @@ ${message || '-'}
               <div className="hidden sm:block absolute -bottom-3 -right-4 text-[10px] text-slate-400">
                 *Illustrative snapshot – not actual ERP UI
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -582,10 +582,10 @@ ${message || '-'}
               <p className="text-xs sm:text-sm">
                 Email:{' '}
                 <a
-                  href="mailto:armaan@hilltopgranite.com"
+                  href="mailto:info@hilltopgranite.com"
                   className="font-medium text-amber-700 hover:text-amber-800"
                 >
-                  armaan@hilltopgranite.com
+                  info@hilltopgranite.com
                 </a>
               </p>
             </div>
