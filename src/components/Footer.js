@@ -43,7 +43,7 @@ const Footer = () => {
                 </p>
 
                 {/* Add more India locations if needed */}
-                <p>Another India branch address...</p>
+                {/* <p>Another India branch address...</p> */}
 
                 <a
                   href={whatsappLink}
